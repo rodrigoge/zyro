@@ -1,0 +1,11 @@
+CREATE TABLE users (
+    user_id UUID PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    email VARCHAR(150) NOT NULL UNIQUE,
+    role_user VARCHAR(50),
+    created_at TIMESTAMP NOT NULL,
+    updated_at TIMESTAMP NOT NULL,
+    enabled BOOLEAN NOT NULL DEFAULT TRUE,
+    locked BOOLEAN NOT NULL DEFAULT FALSE
+);

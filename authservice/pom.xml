@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>br.com.app.zyro</groupId>
 	<artifactId>authservice</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<name>authservice</name>
 	<description>Login and Register accounts service</description>
 	<url/>

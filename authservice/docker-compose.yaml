@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: zyro_postgres
+    restart: always
+    environment:
+      POSTGRES_DB: zyro
+      POSTGRES_USER: zyro
+      POSTGRES_PASSWORD: zyro123
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - zyro_net
+
+  authservice:
+    build: .
+    container_name: zyro_auth
+    depends_on:
+      - postgres
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      ZYRO_USER_PROD: zyro
+      ZYRO_PASS_PROD: zyro123
+      ZYRO_DB_URL_PROD: jdbc:postgresql://postgres:5432/zyro
+    networks:
+      - zyro_net
+
+volumes:
+  pgdata:
+
+networks:
+  zyro_net:

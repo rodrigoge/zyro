@@ -1,13 +1,11 @@
 package br.com.app.zyro.authservice;
 
-import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class AuthserviceApplicationTests {
+class AuthServiceApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
+    void contextLoads() {
+    }
 
 }
