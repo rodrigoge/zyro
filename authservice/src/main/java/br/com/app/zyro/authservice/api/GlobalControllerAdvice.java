@@ -3,6 +3,7 @@ package br.com.app.zyro.authservice.api;
 import br.com.app.zyro.authservice.exceptions.ErrorCodeEnum;
 import br.com.app.zyro.authservice.exceptions.ErrorInfo;
 import br.com.app.zyro.authservice.exceptions.handlers.BadCredentialsExceptionHandler;
+import br.com.app.zyro.authservice.exceptions.handlers.EmailNotFoundExceptionHandler;
 import br.com.app.zyro.authservice.exceptions.handlers.GenericExceptionHandler;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
@@ -28,8 +29,7 @@ public class GlobalControllerAdvice {
     }
 
     @ExceptionHandler(GenericExceptionHandler.class)
-    public ResponseEntity<ErrorInfo> handleGenericExceptionHandler(GenericExceptionHandler exceptionHandler,
-                                                                   HttpServletRequest request) {
+    public ResponseEntity<ErrorInfo> handleGenericExceptionHandler(GenericExceptionHandler exceptionHandler) {
         return ResponseEntity
                 .status(exceptionHandler.getHttpStatus())
                 .body(ErrorInfo.builder()
@@ -68,6 +68,19 @@ public class GlobalControllerAdvice {
                         .errorCode(ErrorCodeEnum.INVALID_REQUEST)
                         .traceId(generateTraceId())
                         .message(errors)
+                        .build());
+    }
+
+    @ExceptionHandler(EmailNotFoundExceptionHandler.class)
+    public ResponseEntity<ErrorInfo> handleEmailNotFoundExceptionHandler(EmailNotFoundExceptionHandler exceptionHandler) {
+        return ResponseEntity
+                .status(exceptionHandler.getHttpStatus())
+                .body(ErrorInfo.builder()
+                        .httpStatus(exceptionHandler.getHttpStatus())
+                        .dateTime(exceptionHandler.getDateTime())
+                        .errorCode(ErrorCodeEnum.BAD_CREDENTIALS)
+                        .traceId(generateTraceId())
+                        .message(exceptionHandler.getMessage())
                         .build());
     }
 }
