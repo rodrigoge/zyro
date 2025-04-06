@@ -6,6 +6,7 @@ import br.com.app.zyro.authservice.dtos.CreateUserResponseDTO;
 import br.com.app.zyro.authservice.exceptions.handlers.EmailNotFoundExceptionHandler;
 import br.com.app.zyro.authservice.exceptions.handlers.GenericExceptionHandler;
 import br.com.app.zyro.authservice.mappers.UsersMapper;
+import br.com.app.zyro.authservice.utils.DateFormatterUtils;
 import br.com.app.zyro.authservice.utils.EncryptUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,7 @@ public class UsersService implements UserDetailsService {
     public CreateUserResponseDTO createUser(CreateUserRequestDTO requestDTO) {
         usersRepository.findByEmail(requestDTO.email()).ifPresent(user -> {
             throw new GenericExceptionHandler(HttpStatus.BAD_REQUEST,
-                    LocalDateTime.now(),
+                    DateFormatterUtils.format(LocalDateTime.now()),
                     String.format("E-mail %s is already in use", requestDTO.email())
             );
         });
@@ -48,7 +49,7 @@ public class UsersService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return usersRepository.findByEmail(username).orElseThrow(() -> new EmailNotFoundExceptionHandler(
                 HttpStatus.BAD_REQUEST,
-                LocalDateTime.now(),
+                DateFormatterUtils.format(LocalDateTime.now()),
                 username
         ));
     }

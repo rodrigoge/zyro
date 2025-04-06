@@ -10,11 +10,11 @@ import java.time.LocalDateTime;
 public class BadCredentialsExceptionHandler extends BadCredentialsException {
 
     private final HttpStatus httpStatus;
-    private final LocalDateTime dateTime;
+    private final String dateTime;
     private final String message;
 
     public BadCredentialsExceptionHandler(HttpStatus httpStatus,
-                                          LocalDateTime dateTime,
+                                          String dateTime,
                                           String message) {
         super(message);
         this.httpStatus = httpStatus;

@@ -5,6 +5,7 @@ import br.com.app.zyro.authservice.exceptions.ErrorInfo;
 import br.com.app.zyro.authservice.exceptions.handlers.BadCredentialsExceptionHandler;
 import br.com.app.zyro.authservice.exceptions.handlers.EmailNotFoundExceptionHandler;
 import br.com.app.zyro.authservice.exceptions.handlers.GenericExceptionHandler;
+import br.com.app.zyro.authservice.utils.DateFormatterUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,8 +65,8 @@ public class GlobalControllerAdvice {
                 .status(HttpStatus.BAD_REQUEST)
                 .body(ErrorInfo.builder()
                         .httpStatus(HttpStatus.BAD_REQUEST)
-                        .dateTime(LocalDateTime.now())
-                        .errorCode(ErrorCodeEnum.INVALID_REQUEST)
+                        .dateTime(DateFormatterUtils.format(LocalDateTime.now()))
+                        .errorCode(ErrorCodeEnum.BAD_CREDENTIALS)
                         .traceId(generateTraceId())
                         .message(errors)
                         .build());

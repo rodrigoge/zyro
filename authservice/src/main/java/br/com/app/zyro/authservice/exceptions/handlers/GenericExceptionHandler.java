@@ -9,11 +9,11 @@ import java.time.LocalDateTime;
 public class GenericExceptionHandler extends RuntimeException {
 
     private final HttpStatus httpStatus;
-    private final LocalDateTime dateTime;
+    private final String dateTime;
     private final String message;
 
     public GenericExceptionHandler(HttpStatus httpStatus,
-                                   LocalDateTime dateTime,
+                                   String dateTime,
                                    String message) {
         super(message);
         this.httpStatus = httpStatus;

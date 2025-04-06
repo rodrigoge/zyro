@@ -7,10 +7,10 @@ import java.time.LocalDateTime;
 
 @Builder
 public record ErrorInfo(
+        String traceId,
         HttpStatus httpStatus,
         ErrorCodeEnum errorCode,
-        LocalDateTime dateTime,
-        String traceId,
+        String dateTime,
         String message
 ) {
 }

@@ -14,6 +14,12 @@ public record CreateUserResponseDTO(
         String email,
 
         @NotBlank
-        RoleEnum roleUser
+        RoleEnum roleUser,
+
+        @NotBlank
+        String createdAt,
+
+        @NotBlank
+        String updatedAt
 ) {
 }
