@@ -9,19 +9,19 @@ import jakarta.validation.constraints.Size;
 
 public record CreateUserRequestDTO(
 
-        @NotBlank
+        @NotBlank(message = "Name cannot be null or empty")
         String name,
 
-        @NotBlank
+        @NotBlank(message = "Password cannot be null or empty")
         @Size(min = 8, max = 16, message = "Password must be between 8 and 20 characters")
         String password,
 
-        @Email
-        @NotBlank
-        @Pattern(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$", message = "Invalid e-mail")
+        @Email(message = "Invalid e-mail format")
+        @NotBlank(message = "E-mail cannot be null or empty")
+        @Pattern(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$", message = "E-mail cannot valid")
         String email,
 
-        @NotNull(message = "Role is required")
+        @NotNull(message = "Role cannot be null or empty")
         RoleEnum roleUser
 ) {
 }
