@@ -1,7 +1,6 @@
 package br.com.app.zyro.authservice.api;
 
 import br.com.app.zyro.authservice.db.RoleEnum;
-import br.com.app.zyro.authservice.dtos.CreateUserRequestDTO;
 import br.com.app.zyro.authservice.dtos.CreateUserResponseDTO;
 import br.com.app.zyro.authservice.mocks.MockBuilder;
 import org.assertj.core.api.Assertions;
